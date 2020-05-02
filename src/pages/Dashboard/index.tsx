@@ -48,7 +48,7 @@ const Dashboard: React.FC = () => {
     }
 
     loadTransactions();
-  }, [transactions]);
+  }, []);
 
   return (
     <>
@@ -98,8 +98,10 @@ const Dashboard: React.FC = () => {
               <tbody key={transaction.id}>
                 <tr>
                   <td className="title">{transaction.title}</td>
-                  <td className="income">
-                    {formatValue(Number(transaction.value))}
+                  <td className={transaction.type}>
+                    {transaction.type === 'outcome'
+                      ? `- ${formatValue(Number(transaction.value))}`
+                      : formatValue(Number(transaction.value))}
                   </td>
                   <td>{transaction.category.title}</td>
                   <td>
